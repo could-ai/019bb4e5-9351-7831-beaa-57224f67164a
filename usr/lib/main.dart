@@ -39,7 +39,8 @@ class EventQRScreen extends StatefulWidget {
 
 class _EventQRScreenState extends State<EventQRScreen> {
   // Controllers for input fields
-  final TextEditingController _emailController = TextEditingController(text: 'yourname@gmail.com');
+  final TextEditingController _emailController = TextEditingController(text: 'rsvp@example.com');
+  final TextEditingController _subjectController = TextEditingController(text: 'Event Invitation');
   final TextEditingController _eventNameController = TextEditingController(text: 'Annual Gala 2024');
   final TextEditingController _dateController = TextEditingController(text: 'December 31, 2024');
   final TextEditingController _timeController = TextEditingController(text: '7:00 PM');
@@ -57,6 +58,7 @@ class _EventQRScreenState extends State<EventQRScreen> {
   @override
   void dispose() {
     _emailController.dispose();
+    _subjectController.dispose();
     _eventNameController.dispose();
     _dateController.dispose();
     _timeController.dispose();
@@ -70,7 +72,7 @@ class _EventQRScreenState extends State<EventQRScreen> {
     // Format: mailto:email?subject=...&body=...
     
     final email = _emailController.text.trim();
-    final subject = 'Event Invitation: ${_eventNameController.text}';
+    final subject = _subjectController.text.trim();
     
     final body = '''
 You are cordially invited to:
@@ -162,6 +164,8 @@ ${_rsvpController.text}
             
             // Input Fields
             _buildTextField('Recipient Email', _emailController, icon: Icons.email),
+            const SizedBox(height: 12),
+            _buildTextField('Email Subject', _subjectController, icon: Icons.subject),
             const SizedBox(height: 12),
             _buildTextField('Event Name', _eventNameController, icon: Icons.event),
             const SizedBox(height: 12),
